@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/widgets/custom_buttom.dart';
+import 'package:note_app/widgets/custom_textfield.dart';
 
 class AddNoteButtomSheet extends StatelessWidget {
   const AddNoteButtomSheet({super.key});
@@ -6,41 +8,36 @@ class AddNoteButtomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
 
-          TextField(
-            decoration: InputDecoration(
-              hintText:'Title',
-              hintStyle: TextStyle(color: Colors.cyan),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
+      decoration: BoxDecoration(
+
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
               ),
-            ),
-          ),
-
-          TextField(
-
-            decoration: InputDecoration(
-              hintText:'Content',
-              hintStyle: TextStyle(color: Colors.cyan),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-
-                ),
-                borderRadius: BorderRadius.circular(15),
+              CustomTextField(hintText: 'Title',),
+              SizedBox(
+                height: 20,
               ),
-            ),
+              CustomTextField(hintText: 'Content',maxLines: 5),
+              SizedBox(
+                height: 50,
+              ),
+              CustomButtom(buttomName: 'add'),
+              SizedBox(
+                height: 30,
+              ),
+            ],
           ),
-
-          Container(
-            color: Colors.cyan,
-            height: 50,
-            width: double.infinity,
-
-            child: Center(child: Text('add',style: TextStyle(color: Colors.black,fontSize: 30),)),
-          ),
-        ],
+        ),
       ),
     );
   }

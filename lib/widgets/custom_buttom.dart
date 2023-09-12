@@ -12,7 +12,7 @@ class CustomButtom extends StatelessWidget {
       ),
 
       height: 50,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Center(
           child: Text(
             buttomName,
