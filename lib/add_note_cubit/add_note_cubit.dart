@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:note_app/models/note_model.dart';
 
@@ -9,7 +10,16 @@ class AddNoteCubit extends Cubit<AddNoteState> {
 
 
   addNote(NoteModel note)
-  {
+ async {
+emit(AddNoteLoading());
+  try {
+    var notesBox =  Hive.box<NoteModel>('notes_box');
+    emit(AddNoteSuccess());
+    await notesBox.add(note);
+  }  catch (ex) {
+    emit(AddNoteFailure('there is an error ${ex.toString()}'));
+  }
+
 
   }
 }
