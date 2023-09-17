@@ -8,8 +8,7 @@ import 'package:note_app/widgets/custom_textfield.dart';
 
 
 class AddNoteButtomSheet extends StatelessWidget {
-   AddNoteButtomSheet({super.key});
-
+  AddNoteButtomSheet({super.key});
 
 
   @override
@@ -21,26 +20,24 @@ class AddNoteButtomSheet extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(10), topLeft: Radius.circular(10)),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-
+      child: BlocProvider(
+        create: (context) => AddNoteCubit(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: BlocConsumer<AddNoteCubit, AddNoteState>(
             listener: (context, state) {
-              if(state is AddNoteFailure)
-                {
-                  print('failed');
-                }
+              if (state is AddNoteFailure) {
+                print('failed  ${state.errMessage}');
+              }
 
-              if(state is AddNoteSuccess)
-                {
-                  Navigator.pop(context);
-                }
+              if (state is AddNoteSuccess) {
+                Navigator.pop(context);
+              }
             },
             builder: (context, state) {
               return ModalProgressHUD(
-                  inAsyncCall: state is AddNoteLoading?true:false,
-                  child: AddNoteForm());
+                  inAsyncCall: state is AddNoteLoading ? true : false,
+                  child: SingleChildScrollView(child: AddNoteForm()));
             },
           ),
         ),
